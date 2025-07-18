@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kirtan Medical Store - Interactive Flyer</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+            min-height: 100vh;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .flyer-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+            max-width: 400px;
+            width: 100%;
+            position: relative;
+            animation: slideIn 0.8s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '✨';
+            position: absolute;
+            font-size: 2em;
+            animation: float 3s ease-in-out infinite;
+            top: 10px;
+            left: 20px;
+        }
+        
+        .header::after {
+            content: '💊';
+            position: absolute;
+            font-size: 1.5em;
+            animation: float 3s ease-in-out infinite reverse;
+            top: 15px;
+            right: 25px;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .store-name {
+            font-size: 1.8em;
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .tagline {
+            font-size: 1em;
+            font-weight: 300;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .main-content {
+            padding: 25px 20px;
+        }
+        
+        .delivery-section {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .delivery-section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255,107,107,0.4);
+        }
+        
+        .delivery-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .delivery-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .delivery-subtitle {
+            font-size: 0.9em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .interactive-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .service-button {
+            background: #f8f9ff;
+            border: 2px solid #e1e8ff;
+            border-radius: 15px;
+            padding: 20px 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
+            border-color: #667eea;
+        }
+        
+        .service-button:active {
+            transform: translateY(0);
+        }
+        
+        .service-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            transform: translate(-50%, -50%);
+        }
+        
+        .service-button:hover::before {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .service-icon {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .service-text {
+            font-size: 1em;
+            font-weight: 600;
+            color: #333;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+        
+        .feature-item {
+            background: #f0f7ff;
+            padding: 15px 10px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 0.85em;
+            font-weight: 500;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-item:hover {
+            background: #667eea;
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        .feature-item::before {
+            content: '+';
+            position: absolute;
+            top: 5px;
+            right: 8px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #4caf50;
+        }
+        
+        .feature-item:hover::before {
+            color: #fff;
+        }
+        
+        .care-section {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .care-section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 154, 158, 0.3);
+        }
+        
+        .care-title {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .care-subtitle {
+            font-size: 0.95em;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .recovery-text {
+            font-size: 0.9em;
+            color: #555;
+            font-style: italic;
+        }
+        
+        .whatsapp-section {
+            background: #25d366;
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .whatsapp-section::before {
+            content: '📱';
+            position: absolute;
+            font-size: 3em;
+            opacity: 0.1;
+            top: 10px;
+            right: 15px;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        
+        .whatsapp-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .whatsapp-number {
+            font-size: 1.4em;
+            font-weight: 700;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .whatsapp-button {
+            background: rgba(255,255,255,0.2);
+            border: 2px solid white;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1em;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .whatsapp-button:hover {
+            background: white;
+            color: #25d366;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .floating-emoji {
+            position: absolute;
+            font-size: 1.5em;
+            animation: floatUp 6s infinite linear;
+        }
+        
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .discount-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #ff4757;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.8em;
+            box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4);
+            animation: wiggle 2s infinite;
+        }
+        
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+        
+        .tap-indicator {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8em;
+            opacity: 0.7;
+            animation: fadeInOut 3s infinite;
+        }
+        
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.8; }
+        }
+        
+        /* Click effects */
+        .click-effect {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #667eea 0%, transparent 70%);
+            pointer-events: none;
+            animation: clickRipple 0.6s ease-out;
+        }
+        
+        @keyframes clickRipple {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-elements" id="floatingElements"></div>
+    
+    <div class="flyer-container">
+        <div class="discount-badge">Special Offers!</div>
+        
+        <div class="header">
+            <h1 class="store-name">⚕️ KIRTAN MEDICAL STORE</h1>
+            <p class="tagline">Your Health, Our Priority</p>
+        </div>
+        
+        <div class="main-content">
+            <div class="delivery-section pulse" onclick="createRipple(event)">
+                <h2 class="delivery-title">🚚 FREE DOORSTEP DELIVERY</h2>
+                <p class="delivery-subtitle">Fast & Reliable Service</p>
+            </div>
+            
+            <div class="interactive-buttons">
+                <div class="service-button" onclick="serviceClick('office')">
+                    <div class="service-icon">🏢</div>
+                    <div class="service-text">Office Delivery</div>
+                </div>
+                
+                <div class="service-button" onclick="serviceClick('home')">
+                    <div class="service-icon">🏠</div>
+                    <div class="service-text">Home Delivery</div>
+                </div>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-item" onclick="featureClick(this)">Discounted Rates</div>
+                <div class="feature-item" onclick="featureClick(this)">Quality Medicines</div>
+                <div class="feature-item" onclick="featureClick(this)">Fast Delivery</div>
+                <div class="feature-item" onclick="featureClick(this)">24/7 Service</div>
+                <div class="feature-item" onclick="featureClick(this)">Expert Advice</div>
+                <div class="feature-item" onclick="featureClick(this)">Prescription Support</div>
+            </div>
+            
+            <div class="care-section" onclick="createRipple(event)">
+                <h2 class="care-title">💝 We Care For You The Most</h2>
+                <p class="care-subtitle">Your health and wellbeing is our top priority</p>
+                <p class="recovery-text">🌟 "Better Recovery Starts with Better Care" 🌟</p>
+            </div>
+            
+            <div class="whatsapp-section">
+                <h3 class="whatsapp-title">📞 Order Now on WhatsApp!</h3>
+                <div class="whatsapp-number">9601525393</div>
+                <a href="https://wa.me/919601525393?text=Hi%20Kirtan%20Medical%20Store!%20I%20need%20medicines%20delivered%20to%20my%20location.%20Please%20help%20me%20with%20my%20order." class="whatsapp-button" onclick="whatsappClick()">
+                    <span>💬</span>
+                    Chat Now
+                </a>
+                <div class="tap-indicator">👆 Tap to chat instantly</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Create floating emojis
+        function createFloatingEmoji() {
+            const emojis = ['💊', '🏥', '⚕️', '🩺', '💉', '🌡️', '💝', '✨'];
+            const emoji = document.createElement('div');
+            emoji.className = 'floating-emoji';
+            emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            emoji.style.left = Math.random() * 100 + '%';
+            emoji.style.animationDelay = Math.random() * 2 + 's';
+            document.getElementById('floatingElements').appendChild(emoji);
+            
+            setTimeout(() => {
+                emoji.remove();
+            }, 6000);
+        }
+        
+        // Create floating emojis every 2 seconds
+        setInterval(createFloatingEmoji, 2000);
+        
+        // Create ripple effect
+        function createRipple(event) {
+            const ripple = document.createElement('div');
+            ripple.className = 'click-effect';
+            
+            const rect = event.currentTarget.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+            
+            ripple.style.left = x - 10 + 'px';
+            ripple.style.top = y - 10 + 'px';
+            
+            event.currentTarget.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        }
+        
+        // Service button click
+        function serviceClick(type) {
+            const button = event.currentTarget;
+            button.style.background = '#667eea';
+            button.style.color = 'white';
+            button.style.transform = 'scale(0.95)';
+            
+            setTimeout(() => {
+                button.style.background = '#f8f9ff';
+                button.style.color = '#333';
+                button.style.transform = 'scale(1)';
+            }, 200);
+            
+            // Show confirmation
+            const message = type === 'office' ? 'Office delivery selected! 🏢' : 'Home delivery selected! 🏠';
+            showMessage(message);
+        }
+        
+        // Feature click
+        function featureClick(element) {
+            element.style.transform = 'scale(1.1)';
+            element.style.background = '#4caf50';
+            element.style.color = 'white';
+            
+            setTimeout(() => {
+                element.style.transform = 'scale(1)';
+                element.style.background = '#f0f7ff';
+                element.style.color = '#333';
+            }, 300);
+        }
+        
+        // WhatsApp click
+        function whatsappClick() {
+            showMessage('Opening WhatsApp... 📱');
+            
+            // Add click effect to button
+            const button = event.currentTarget;
+            button.style.transform = 'scale(0.95)';
+            
+            setTimeout(() => {
+                button.style.transform = 'scale(1)';
+            }, 150);
+        }
+        
+        // Show message
+        function showMessage(text) {
+            const message = document.createElement('div');
+            message.textContent = text;
+            message.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: #333;
+                color: white;
+                padding: 15px 25px;
+                border-radius: 25px;
+                font-size: 1em;
+                font-weight: 600;
+                z-index: 1000;
+                animation: messagePopup 2s ease-out forwards;
+            `;
+            
+            document.body.appendChild(message);
+            
+            setTimeout(() => {
+                message.remove();
+            }, 2000);
+        }
+        
+        // Add CSS animation for message popup
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes messagePopup {
+                0% {
+                    opacity: 0;
+                    transform: translate(-50%, -50%) scale(0.5);
+                }
+                20% {
+                    opacity: 1;
+                    transform: translate(-50%, -50%) scale(1.1);
+                }
+                100% {
+                    opacity: 0;
+                    transform: translate(-50%, -50%) scale(1);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Add touch feedback for mobile
+        document.addEventListener('touchstart', function(e) {
+            const target = e.target.closest('.service-button, .feature-item, .care-section, .delivery-section');
+            if (target) {
+                target.style.transform = 'scale(0.95)';
+            }
+        });
+        
+        document.addEventListener('touchend', function(e) {
+            const target = e.target.closest('.service-button, .feature-item, .care-section, .delivery-section');
+            if (target) {
+                setTimeout(() => {
+                    target.style.transform = 'scale(1)';
+                }, 150);
+            }
+        });
+    </script>
+</body>
+</html>
